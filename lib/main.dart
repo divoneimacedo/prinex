@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:prinex/toast.dart';
 void main(){
   runApp(
     MaterialApp(
@@ -36,14 +36,38 @@ class _HomeState extends State<Home> {
           children: <Widget>[
             RaisedButton(
               child: const Text("Pressione aqui"),
+              onPressed: () => _toastEvent(),
 
             )
           ],
         ),
-      ),),
+      ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Image.asset("images/logo_prinex.png",fit: BoxFit.contain,),
+              decoration: BoxDecoration(
+                color: Colors.lightGreen
+              ),
+            ),
+            ListTile(
+              title: Text(
+                  "INICIAL",
+                style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
+              ),
+              leading: Icon(Icons.home),
+            ),
+          ],
+        ),
+      ),
     );
   }
-
+  void _toastEvent(){
+    Toast.show("Toast plugin app", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+  }
 
 }
 
