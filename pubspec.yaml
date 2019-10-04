@@ -17,7 +17,10 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  #Toast messages
   toast: ^0.1.4
+  #youtube player
+  youtube_player: ^3.5.0
 
   flutter:
     sdk: flutter
