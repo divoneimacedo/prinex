@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
 
             RaisedButton(
               child: const Text("Pressione aqui"),
-              onPressed: () => _toastEvent(),
+              /*onPressed: () => _toastEvent(),*/
 
             )
 
@@ -94,7 +94,7 @@ class _HomeState extends State<Home> {
               ),
               leading: Icon(Icons.home,color: Colors.lightGreen,),
               onTap: (){
-                Toast.show("Inicial", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+                /*Toast.show("Inicial", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);*/
               },
             ),
             ListTile(
