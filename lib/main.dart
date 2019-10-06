@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
 
 
       ),
-      body: SingleChildScrollView(
+    body: SingleChildScrollView(
         child:Center(child: Container(
         padding:EdgeInsets.all(5),
         child:  Column(
@@ -87,28 +87,13 @@ class _HomeState extends State<Home> {
                 color: Colors.lightGreen
               ),
             ),
-            ListTile(
-              title: Text(
-                  "Inicial",
-                style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.lightGreen),
-              ),
-              leading: Icon(Icons.home,color: Colors.lightGreen,),
-              onTap: (){
-                /*Toast.show("Inicial", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);*/
-              },
-            ),
-            ListTile(
-              title: Text("Como funciona?",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.lightGreen),),
-              leading: Icon(Icons.question_answer,color: Colors.lightGreen,),
-            ),
-            ListTile(
-              title: Text("Agências",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.lightGreen),),
-              leading: Icon(Icons.local_post_office,color: Colors.lightGreen,),
-            ),
-            ListTile(
-              title: Text("Contato",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.lightGreen),),
-              leading: Icon(Icons.contact_mail,color: Colors.lightGreen,),
-            )
+            CustomListTile("Inicial",Icons.home, (){
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => ComoFunciona()
+                            )); }),
+            CustomListTile("Como funciona",Icons.question_answer, (){}),
+            CustomListTile("Agências",Icons.location_on, (){}),
+            CustomListTile("Contato",Icons.contact_mail, (){}),
           ],
         ),
       ),
@@ -122,6 +107,75 @@ class _HomeState extends State<Home> {
 
 
 }
+
+class CustomListTile extends StatelessWidget {
+  IconData icon;
+  String text;
+  Function onTap;
+  //construtor
+  CustomListTile(this.text,this.icon, this.onTap);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: Colors.green.shade400))
+        ),
+        child:InkWell(
+          splashColor: Colors.lightGreen,
+          onTap: onTap,
+          child: Container(
+            height: 40,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Icon(icon, color: Colors.lightGreen,),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(text, style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.lightGreen),),
+                    )
+                  ],
+                ),
+                Icon(Icons.arrow_right, color: Colors.green,)
+              ],
+            ),
+          ),
+        ),
+    )
+    );
+  }
+}
+
+
+class ComoFunciona extends StatelessWidget {
+  /*final Home home;*/
+
+
+  /*ComoFunciona({Key key,@required this.home}) : super(key: key);*/
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Prinex - Como funciona"),
+      ),
+      body: SingleChildScrollView(
+        child:Center(
+          child: Column(
+            children: <Widget>[
+              Text("Texto como funciona")
+            ],
+          ),
+        )
+      ),
+    );
+  }
+}
+
 
 class TextConst{
   String tituloFacaTeste = "Faca um teste: 0800 42-1000";
