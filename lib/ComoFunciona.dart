@@ -6,6 +6,8 @@ class ComoFunciona  extends StatelessWidget {
   Widget build(BuildContext context) {
     Textos texto = Textos();
     texto.Construtor();
+    double width = MediaQuery.of(context).size.width;
+    double percent = width * 0.65;
     return Scaffold(
       appBar: AppBar(
         title: Text("Como funciona"),
@@ -14,14 +16,36 @@ class ComoFunciona  extends StatelessWidget {
       body: SingleChildScrollView(
         child: Center(
             child: Container(
-              padding: EdgeInsets.all(3),
+              padding: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                border: Border.all(width: 3,color: Colors.yellow)
+              ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(top: 5.0),
+                    padding: EdgeInsets.only(top: 5.0,bottom: 5.0),
                     child: Text(texto.RetornaTexto("Titulo1"), style: TextStyle(color:Colors.green,fontWeight: FontWeight.bold,fontSize: 15),textAlign: TextAlign.left),
+
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 1,color: Colors.grey),
+                    ),
+                    padding: EdgeInsets.all(5),
+                    child:Column(
+                        children: <Widget>[
+                          Image.asset(texto.RetornaImage("Image1"),width: percent),
+                          Padding(
+                            padding: EdgeInsets.only(top: 10.0,bottom: 10.0),
+                            child:Text(texto.RetornaTexto("Explicacao1"),textAlign: TextAlign.justify,)
+                          )
+                          
+
+                      ],
+                    ),
                   )
                 ],
               ),
