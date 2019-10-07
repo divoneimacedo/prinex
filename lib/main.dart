@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as prefix0;
+import 'package:prinex/ComoFunciona.dart';
 
 //import 'package:prinex/toast.dart';
 import 'package:toast/toast.dart';
@@ -8,6 +10,9 @@ void main(){
   runApp(
     MaterialApp(
       home: Home(),
+      routes: <String, WidgetBuilder>{
+        "/ComoFunciona":(BuildContext context) => new ComoFunciona()
+      },
     )
   );
 }
@@ -43,7 +48,7 @@ class _HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Image.asset("images/1.jpg",fit: BoxFit.fitWidth,),
+            Image.asset("images/Banner1.jpg",fit: BoxFit.fitWidth,),
             Padding(
               padding: EdgeInsets.only(top: 5.0,bottom: 5.0),
               child:Text(text.tituloFacaTeste, style: TextStyle(color:Colors.green,fontWeight: FontWeight.bold,fontSize: 15),textAlign: TextAlign.left),
@@ -87,11 +92,11 @@ class _HomeState extends State<Home> {
                 color: Colors.lightGreen
               ),
             ),
-            CustomListTile("Inicial",Icons.home, (){
-                            Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => ComoFunciona()
-                            )); }),
-            CustomListTile("Como funciona",Icons.question_answer, (){}),
+            CustomListTile("Inicial",Icons.home, (){}),
+            CustomListTile("Como funciona",Icons.question_answer, (){
+              Navigator.of(context).pop();
+              Navigator.of(context).pushNamed("/ComoFunciona");
+            }),
             CustomListTile("Agências",Icons.location_on, (){}),
             CustomListTile("Contato",Icons.contact_mail, (){}),
           ],
@@ -151,7 +156,7 @@ class CustomListTile extends StatelessWidget {
 }
 
 
-class ComoFunciona extends StatelessWidget {
+/*class ComoFunciona extends StatelessWidget {
   /*final Home home;*/
 
 
@@ -174,7 +179,7 @@ class ComoFunciona extends StatelessWidget {
       ),
     );
   }
-}
+}*/
 
 
 class TextConst{
