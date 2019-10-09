@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' as prefix0;
-import 'package:prinex/ComoFunciona.dart';
+import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:prinex/ComoFunciona.dart';
+import 'package:prinex/calculoPrinex.dart';
 //import 'package:prinex/toast.dart';
 import 'package:toast/toast.dart';
 import 'package:youtube_player/youtube_player.dart';
+import 'package:connectivity/connectivity.dart';
 
 void main(){
   runApp(
@@ -29,11 +31,31 @@ class ColorHTML{
 }
 
 class _HomeState extends State<Home> {
+  Connectivity connectivity;
+  StreamSubscription<ConnectivityResult> subscription;
+  @override
+  void initState(){
+    super.initState();
+    connectivity = new Connectivity();
+    subscription = connectivity.onConnectivityChanged.listen((ConnectivityResult result){
+        print(result);
+    });
+  }
 
+  @override
+  void dispose(){
+    subscription.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     TextConst text = TextConst();
+    String _origemSelected;
+    String _embalagemSelected;
+    String _destinoSelected;
+    ReturnList retorno = ReturnList();
+    String body = retorno.getData("http://www.princesadoscampos.com.br/prinex/json.php","origem").toString();
     return Scaffold(
       appBar: AppBar(
         title: Image.asset('images/logo_prinex.png',fit: BoxFit.cover),
@@ -49,6 +71,7 @@ class _HomeState extends State<Home> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Image.asset("images/Banner1.jpg",fit: BoxFit.fitWidth,),
+            Text(body),
             Padding(
               padding: EdgeInsets.only(top: 5.0,bottom: 5.0),
               child:Text(text.tituloFacaTeste, style: TextStyle(color:Colors.green,fontWeight: FontWeight.bold,fontSize: 15),textAlign: TextAlign.left),
@@ -70,10 +93,35 @@ class _HomeState extends State<Home> {
               quality: YoutubeQuality.HIGH,
             ),
 
-            RaisedButton(
-              child: const Text("Pressione aqui"),
-              /*onPressed: () => _toastEvent(),*/
+            Container(
+              padding: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                border: Border.all(width: 1,color: Colors.grey)
+              ),
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 5,
+                        child: DropdownButton<String>(
+                          hint: Text("Origem"),
+                          items: <String>['A', 'B', 'C', 'D'].map((String value) {
+                            return new DropdownMenuItem<String>(
+                              value: "A",
+                              child: new Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (String newValue) {
 
+                          },
+
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
             )
 
           ],
