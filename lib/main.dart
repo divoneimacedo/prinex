@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
     super.initState();
     connectivity = new Connectivity();
     subscription = connectivity.onConnectivityChanged.listen((ConnectivityResult result){
-        print(result);
+       // print(result);
     });
   }
 
@@ -54,8 +54,16 @@ class _HomeState extends State<Home> {
     String _origemSelected;
     String _embalagemSelected;
     String _destinoSelected;
+    List _fOrigem;
+    List _origem;
     ReturnList retorno = ReturnList();
-    String body = retorno.getData("http://www.princesadoscampos.com.br/prinex/json.php","origem").toString();
+    String body = "vazio";
+    //retorno.getData("http://www.princesadoscampos.com.br/prinex/json.php","origem");
+    _fOrigem = await retorno.getData("http://www.princesadoscampos.com.br/prinex/json.php","origem");
+    /*_fOrigem.then((result){
+        _origem =result;
+    });*/
+    print(_origem);
     return Scaffold(
       appBar: AppBar(
         title: Image.asset('images/logo_prinex.png',fit: BoxFit.cover),
@@ -71,7 +79,7 @@ class _HomeState extends State<Home> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Image.asset("images/Banner1.jpg",fit: BoxFit.fitWidth,),
-            Text(body),
+            Text("vazio"),
             Padding(
               padding: EdgeInsets.only(top: 5.0,bottom: 5.0),
               child:Text(text.tituloFacaTeste, style: TextStyle(color:Colors.green,fontWeight: FontWeight.bold,fontSize: 15),textAlign: TextAlign.left),
