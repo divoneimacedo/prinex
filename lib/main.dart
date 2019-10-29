@@ -49,7 +49,7 @@ class _HomeState extends State<Home> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
     TextConst text = TextConst();
     String _origemSelected;
     String _embalagemSelected;
@@ -59,7 +59,7 @@ class _HomeState extends State<Home> {
     ReturnList retorno = ReturnList();
     String body = "vazio";
     //retorno.getData("http://www.princesadoscampos.com.br/prinex/json.php","origem");
-    _fOrigem = await retorno.getData("http://www.princesadoscampos.com.br/prinex/json.php","origem");
+    //_fOrigem = await retorno.getData("http://www.princesadoscampos.com.br/prinex/json.php","origem");
     /*_fOrigem.then((result){
         _origem =result;
     });*/
