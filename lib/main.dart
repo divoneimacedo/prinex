@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:prinex/ComoFunciona.dart';
@@ -7,6 +8,7 @@ import 'package:prinex/calculoPrinex.dart';
 import 'package:toast/toast.dart';
 import 'package:youtube_player/youtube_player.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:prinex/data/origem.dart';
 
 void main(){
   runApp(
@@ -31,40 +33,44 @@ class ColorHTML{
 }
 
 class _HomeState extends State<Home> {
-  Connectivity connectivity;
-  StreamSubscription<ConnectivityResult> subscription;
+  /*Connectivity connectivity;
+  StreamSubscription<ConnectivityResult> subscription;*/
+  List origemPrinex = new List<Ori>();
+  _getOrigem(){
+    Api.getData("http://www.princesadoscampos.com.br/prinex/json.php","origem").then((response){
+      setState(() {
+        Iterable teste  = json.decode(response.body);
+        print(teste);
+        //origemPrinex = teste.map((model) => Ori.fromJson(model)).toList();
+        //print(origemPrinex);
+      });
+    });
+  }
+  _HomeState(){
+    _getOrigem();
+  }
   @override
   void initState(){
     super.initState();
-    connectivity = new Connectivity();
+   /* connectivity = new Connectivity();
     subscription = connectivity.onConnectivityChanged.listen((ConnectivityResult result){
        // print(result);
-    });
+    });*/
   }
 
   @override
   void dispose(){
-    subscription.cancel();
+    //subscription.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context)  {
     TextConst text = TextConst();
-    String _origemSelected;
-    String _embalagemSelected;
-    String _destinoSelected;
-    List _fOrigem;
-    List _origem;
-    ReturnList retorno = ReturnList();
-    String body = "vazio";
-    //retorno.getData("http://www.princesadoscampos.com.br/prinex/json.php","origem");
-    //_fOrigem = await retorno.getData("http://www.princesadoscampos.com.br/prinex/json.php","origem");
-    /*_fOrigem.then((result){
-        _origem =result;
-    });*/
-    //teste de comentario
-    print(_origem);
+
+
+    print(origemPrinex);
+
     return Scaffold(
       appBar: AppBar(
         title: Image.asset('images/logo_prinex.png',fit: BoxFit.cover),
