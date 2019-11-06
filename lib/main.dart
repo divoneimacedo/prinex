@@ -36,13 +36,14 @@ class _HomeState extends State<Home> {
   /*Connectivity connectivity;
   StreamSubscription<ConnectivityResult> subscription;*/
   List origemPrinex = new List<Ori>();
+  Iterable lista;
   _getOrigem(){
     Api.getData("http://www.princesadoscampos.com.br/prinex/json.php","origem").then((response){
       setState(() {
-        Iterable teste  = json.decode(response.body);
-        print(teste);
-        //origemPrinex = teste.map((model) => Ori.fromJson(model)).toList();
-        //print(origemPrinex);
+          lista = json.decode(response.body);
+          //print(lista);
+          origemPrinex = lista.map((model)  => Ori.fromJson(model)).toList();
+          print(origemPrinex);
       });
     });
   }
@@ -69,7 +70,7 @@ class _HomeState extends State<Home> {
     TextConst text = TextConst();
 
 
-    print(origemPrinex);
+   // print(origemPrinex);
 
     return Scaffold(
       appBar: AppBar(
